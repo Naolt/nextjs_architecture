@@ -1,4 +1,28 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run lint-staged
+echo "Running pre-commit hook"
+
+# check tsconfig stndards
+npm run check-types || 
+(
+	  echo "Typescript check failed"
+  exit 1
+)
+
+# check linting standards
+npm run check-lint || 
+(
+	  echo "Linting failed"
+  exit 1
+)
+
+# check prettier standards
+npm run check-format || 
+(
+	  echo "Prettier check failed"
+  exit 1
+)
+
+# if every thing passes echo good
+echo "✅✅✅All checks passed✅✅✅"
