@@ -23,3 +23,11 @@ npm run check-format ||
 	  echo "Prettier check failed";
   exit 1
 )
+
+# format the code
+npm run format || 
+(
+	  echo "Prettier format failed";
+  exit 1
+)
+
