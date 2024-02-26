@@ -1,0 +1,28 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running pre-commit hook"
+
+# check tsconfig stndards
+npm run check-types || 
+(
+	  echo "Typescript check failed";
+  false;
+)
+
+# check linting standards
+npm run check-lint || 
+(
+	  echo "Linting failed";
+  false;
+)
+
+# check prettier standards
+npm run check-format || 
+(
+	  echo "Prettier check failed";
+  false;
+)
+
+# if every thing passes echo good
+echo "✅✅✅All checks passed✅✅✅"
