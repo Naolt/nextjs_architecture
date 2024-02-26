@@ -1,5 +1,5 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/husky.sh"
 
 echo "Running pre-commit hook"
 
@@ -7,22 +7,19 @@ echo "Running pre-commit hook"
 npm run check-types || 
 (
 	  echo "Typescript check failed";
-  false;
+  exit 1
 )
 
 # check linting standards
 npm run check-lint || 
 (
 	  echo "Linting failed";
-  false;
+  exit 1
 )
 
 # check prettier standards
 npm run check-format || 
 (
 	  echo "Prettier check failed";
-  false;
+  exit 1
 )
-
-# if every thing passes echo good
-echo "✅✅✅All checks passed✅✅✅"
