@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 const llo: Number = 'bello';
+const glo: Number = 'bello';
 
 export default function Home() {
   return (

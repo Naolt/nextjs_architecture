@@ -6,22 +6,22 @@ echo "Running pre-commit hook"
 # check tsconfig stndards
 npm run check-types || 
 (
-	  echo "Typescript check failed"
-  exit 1
+	  echo "Typescript check failed";
+  false;
 )
 
 # check linting standards
 npm run check-lint || 
 (
-	  echo "Linting failed"
-  exit 1
+	  echo "Linting failed";
+  false;
 )
 
 # check prettier standards
 npm run check-format || 
 (
-	  echo "Prettier check failed"
-  exit 1
+	  echo "Prettier check failed";
+  false;
 )
 
 # if every thing passes echo good
