@@ -1,72 +1,10 @@
-"use client";
-import DashBoardCard from "@/components/Reports/Cards";
-import DashBaordBarChart from "@/components/Reports/Charts/BarChart";
-import ExpiredProducts from "@/components/Reports/Tables/ExpiredProducts";
-import RecentlyAddedProducts from "@/components/Reports/Tables/RecentlyAddedProducts";
-import { Container, Grid } from "@mantine/core";
-import {
-  IconBrandProducthunt,
-  IconMoneybag,
-  IconReportMoney,
-  IconUser,
-} from "@tabler/icons-react";
+import { Container } from "@mantine/core";
 
-export default function pharmacyDashboardpage({
-  chidlren,
-}: {
-  chidlren: React.ReactNode;
-}) {
+export default function Page() {
   return (
-    <Grid bg={"rd"} p={30}>
-      <Grid.Col span={12}>
-        <Grid>
-          <Grid.Col span={3}>
-            <DashBoardCard
-              color="orange.6"
-              label={"Customers"}
-              value={100}
-              Icon={IconUser}
-            />
-          </Grid.Col>
-          <Grid.Col span={3}>
-            <DashBoardCard
-              color="green.6"
-              label={"Total Profit"}
-              value={25440}
-              Icon={IconMoneybag}
-            />
-          </Grid.Col>
-          <Grid.Col span={3}>
-            <DashBoardCard
-              color="blue.6"
-              label={"Total Sales"}
-              value={"ETB 45,000"}
-              Icon={IconReportMoney}
-            />
-          </Grid.Col>
-          <Grid.Col span={3}>
-            <DashBoardCard
-              color="red.6"
-              label={"Total Stock"}
-              value={4500}
-              Icon={IconBrandProducthunt}
-            />
-          </Grid.Col>
-        </Grid>
-      </Grid.Col>
-      <Grid.Col span={12}>
-        <Grid>
-          <Grid.Col span={8}>
-            <DashBaordBarChart />
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <RecentlyAddedProducts />
-          </Grid.Col>
-        </Grid>
-      </Grid.Col>
-      <Grid.Col span={12}>
-        <ExpiredProducts />
-      </Grid.Col>
-    </Grid>
+    <Container>
+      <h1>Dashboard</h1>
+      <p>Welcome to the dashboard</p>
+    </Container>
   );
 }

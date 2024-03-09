@@ -19,10 +19,13 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconBrandGoogleFilled } from "@tabler/icons-react";
 import SigninStyle from "./Signin.module.css";
 //import axios from "axios";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 //import { useCookies } from "react-cookie";
 import Link from "next/link";
 import Image from "next/image";
+import { getUserbyId, login } from "@/firebase/firebase";
+import { log } from "console";
+import { useRouter } from "next/navigation";
 //import eskalateLogo from "../../../public/Logo1.svg";
 //import eskalateLogoResponsive from "../../../public/Logo.svg";
 
@@ -32,6 +35,7 @@ interface FormValues {
 }
 
 const Page = () => {
+  const router = useRouter();
   const [loading, { toggle }] = useDisclosure();
   //  const [cookies, setCookie, removeCookie] = useCookies(["developer"]);
   const [loginFail, setLoginFail] = useState(false);
@@ -57,30 +61,45 @@ const Page = () => {
     },
   });
 
-  const handleLogin = async (values: FormValues) => {
-    //try {
-    //  // console.log(form.values);
-    //  const value = form.values;
-    //  const res = await axios.post(
-    //    "https://eskalate.onrender.com/api/Auth/login",
-    //    value
-    //  );
-    //  if (res.status === 200) {
-    //    console.log("Login Success", res.data);
-    //    const data = {
-    //      accessToken: res.data.accessToken,
-    //      ...res.data.user,
-    //    };
-    //    console.log("User info", data);
-    //    // setCookie('developer', JSON.stringify(data), { path: '/' });
-    //    console.log("Cookies", cookies.developer);
-    //    close();
-    //    form.reset();
-    //  }
-    //} catch (error) {
-    //  console.error("Login Failed AAAAAAAA", error);
-    //  setLoginFail(true);
-    //}
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    form.validate();
+    const isValid = form.isValid();
+    if (isValid) {
+      //toggle();
+      //console.log(form.values);
+      //const response = login({
+      //  email: form.values.email,
+      //  password: form.values.password,
+      //})
+      //  .then((res: any) => {
+      //    return res.uid;
+      //  })
+      //  .then(async (uid: any) => {
+      //    const userData = await getUserbyId(uid);
+      //    return userData;
+      //  })
+      //  .catch((error: any) => {
+      //    console.log(error);
+      //    setLoginFail(true);
+      //  });
+      //console.log("User DATA", response);
+
+      const loginResponse = await login({
+        email: form.values.email,
+        password: form.values.password,
+      });
+      if (loginResponse?.uid) {
+        const userData = await getUserbyId(loginResponse.uid);
+        console.log("User DATA", userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+        if (userData.role === "pharmacy") {
+          router.push("http://localhost:3000/dashboard/dashboard");
+        } else {
+          router.push("http://localhost:3000/dashboard/pharmacy");
+        }
+      }
+    }
   };
 
   return (
@@ -106,13 +125,7 @@ const Page = () => {
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, lg: 6 }} className={SigninStyle.signin}>
-          <Box
-            component="form"
-            className={SigninStyle.signinForm}
-            onSubmit={form.onSubmit((values: FormValues) =>
-              handleLogin(values ? values : { email: "", password: "" })
-            )}
-          >
+          <form className={SigninStyle.signinForm} onSubmit={handleLogin}>
             <Text fw={500} className={SigninStyle.loginText}>
               Login
             </Text>
@@ -176,7 +189,7 @@ const Page = () => {
               }}
               // maw={550}
             ></Box>
-          </Box>
+          </form>
         </Grid.Col>
       </Grid>
     </MantineProvider>

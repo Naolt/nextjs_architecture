@@ -15,13 +15,20 @@ import { IconEditCircle } from "@tabler/icons-react";
 export default function ExpiredProducts() {
   const tableData: TableData = {
     caption: "Some elements from periodic table",
-    head: ["Product Name", "Category", "Brand", "Price", "Quantity"],
+    head: [
+      "Product Name",
+      "Category",
+      "Brand",
+      "Price",
+      "Quantity",
+      "Expire Date",
+    ],
     body: [
-      [6, 12.011, "C", "Carbon", 4],
-      [7, 14.007, "N", "Nitrogen", 5],
-      [39, 88.906, "Y", "Yttrium", 7],
-      [56, 137.33, "Ba", "Barium", 8],
-      [58, 140.12, "Ce", "Cerium", 9],
+      ["Paracetamol", "Pain Relief", "GSK", "100", "1000", "2023-12-31"],
+      ["Ibuprofen", "Pain Relief", "GSK", "200", "500", "2023-12-31"],
+      ["Amoxicillin", "Antibiotic", "GSK", "300", "300", "2023-12-31"],
+      ["Ciprofloxacin", "Antibiotic", "GSK", "400", "200", "2023-12-31"],
+      ["Doxycycline", "Antibiotic", "GSK", "500", "100", "2023-12-31"],
     ],
   };
   return (

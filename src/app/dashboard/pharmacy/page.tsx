@@ -3,6 +3,7 @@ import AddPharmacyForm from "@/components/Pharmacy/AddPharmacy";
 import EditPharmacyForm from "@/components/Pharmacy/EditPharmacy";
 import AddProductForm from "@/components/Product/AddProduct";
 import EditProductForm from "@/components/Product/EditProduct";
+import { getPharmacies } from "@/firebase/firebase";
 import {
   Box,
   Button,
@@ -16,40 +17,42 @@ import {
 import { Container } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconEditCircle } from "@tabler/icons-react";
+import { use, useEffect, useState } from "react";
 
 export default function PharmacyList() {
   const [opened, { open, close }] = useDisclosure(false);
   const [editOpened, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
+
+  const [pharmacies, setPharmacies] = useState([]);
+
+  const fetchPharmacies = async () => {
+    const pharmacies = await getPharmacies();
+    return pharmacies;
+  };
+
+  useEffect(() => {
+    // fetch pharmacies
+    const pharmacies = fetchPharmacies().then((pharmacies) => {
+      //console.log(Object.values(pharmacies));
+      setPharmacies(Object.values(pharmacies));
+    });
+
+    // setPharmacies(pharmacies);
+  }, []);
+
+  const tableBody = pharmacies.map((pharmacy: any) => {
+    return [
+      pharmacy.name,
+      "789 Elm Street, Anytown, CA 54321",
+      <IconEditCircle key={pharmacy.owner} onClick={openEdit} />,
+    ];
+  });
+
   const tableData: TableData = {
     caption: "Pharmacy Information",
-    head: [
-      "Pharmacy Name",
-      "Pharmacy Username",
-      "Pharmacy Location",
-      "Actions",
-    ],
-    body: [
-      [
-        "Healthy Choice Pharmacy",
-        "hcp_admin",
-        "123 Main Street, Anytown, CA 12345",
-        <IconEditCircle key={1} onClick={openEdit} />,
-      ],
-      [
-        "Night Owl Pharmacy",
-        "nightowl_user",
-        "789 Elm Street, Anytown, CA 54321",
-        <IconEditCircle key={2} onClick={openEdit} />,
-      ],
-      [
-        "Sunrise Wellness Center",
-        "sunrise_staff",
-        "456 Maple Avenue, Anytown, CA 98765",
-        <IconEditCircle key={3} onClick={openEdit} />,
-      ],
-      // Add more pharmacies as needed
-    ],
+    head: ["Pharmacy Name", "Pharmacy Location", "Actions"],
+    body: tableBody,
   };
 
   return (

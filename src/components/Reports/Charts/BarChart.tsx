@@ -12,12 +12,14 @@ class DashBoardBarChart extends Component {
           id: "basic-bar",
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+          // lets use real world data for the x-axis and lets make the last month march since we are in march
+          categories: ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar"],
         },
       },
       series: [
+        // lets use real world data for the series which is name and data
         {
-          name: "series-1",
+          name: "Sales",
           data: [30, 40, 45, 50, 49, 60, 70, 91],
         },
       ],

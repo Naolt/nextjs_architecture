@@ -21,47 +21,106 @@ export default function ProductList() {
     useDisclosure(false);
   const tableData: TableData = {
     caption: "Some elements from periodic table",
-    head: ["Product Name", "Category", "Brand", "Price", "Quantity", "Action"],
+    head: [
+      "Product Name",
+      "Category",
+      "Brand",
+      "Price",
+      "Quantity",
+      "Expire Date",
+      "Action",
+    ],
+    // lets create real world data for pharmaceutical products
     body: [
       [
-        6,
-        12.011,
-        "C",
-        "Carbon",
-        4,
-        <IconEditCircle key={1} onClick={openEdit} />,
+        "Paracetamol",
+        "Pain Relief",
+        "GSK",
+        "100",
+        "1000",
+        "2023-12-31",
+        <Button
+          size="xs"
+          onClick={openEdit}
+          leftIcon={<IconEditCircle size={20} />}
+        >
+          Edit
+        </Button>,
       ],
       [
-        7,
-        14.007,
-        "N",
-        "Nitrogen",
-        5,
-        <IconEditCircle key={2} onClick={openEdit} />,
+        "Ibuprofen",
+        "Pain Relief",
+        "GSK",
+        "200",
+        "500",
+        "2023-12-31",
+        <Button
+          size="xs"
+          onClick={openEdit}
+          leftIcon={<IconEditCircle size={20} />}
+        >
+          Edit
+        </Button>,
       ],
       [
-        39,
-        88.906,
-        "Y",
-        "Yttrium",
-        7,
-        <IconEditCircle key={3} onClick={openEdit} />,
+        "Ciprofloxacin",
+        "Antibiotic",
+        "GSK",
+        "300",
+        "300",
+        "2023-12-31",
+        <Button
+          size="xs"
+          onClick={openEdit}
+          leftIcon={<IconEditCircle size={20} />}
+        >
+          Edit
+        </Button>,
       ],
       [
-        56,
-        137.33,
-        "Ba",
-        "Barium",
-        8,
-        <IconEditCircle key={4} onClick={openEdit} />,
+        "Amoxicillin",
+        "Antibiotic",
+        "GSK",
+        "400",
+        "200",
+        "2023-12-31",
+        <Button
+          size="xs"
+          onClick={openEdit}
+          leftIcon={<IconEditCircle size={20} />}
+        >
+          Edit
+        </Button>,
       ],
       [
-        58,
-        140.12,
-        "Ce",
-        "Cerium",
-        9,
-        <IconEditCircle key={5} onClick={openEdit} />,
+        "Omeprazole",
+        "Gastrointestinal",
+        "GSK",
+        "500",
+        "100",
+        "2023-12-31",
+        <Button
+          size="xs"
+          onClick={openEdit}
+          leftIcon={<IconEditCircle size={20} />}
+        >
+          Edit
+        </Button>,
+      ],
+      [
+        "Ranitidine",
+        "Gastrointestinal",
+        "GSK",
+        "600",
+        "50",
+        "2023-12-31",
+        <Button
+          size="xs"
+          onClick={openEdit}
+          leftIcon={<IconEditCircle size={20} />}
+        >
+          Edit
+        </Button>,
       ],
     ],
   };
@@ -88,7 +147,7 @@ export default function ProductList() {
         onClose={close}
         title="Add Product"
         centered
-        size={"lg"}
+        size={"2xl"}
       >
         <AddProductForm />
       </Modal>
@@ -97,7 +156,7 @@ export default function ProductList() {
         onClose={closeEdit}
         title="Edit Product"
         centered
-        size={"lg"}
+        size={"2xl"}
       >
         <EditProductForm />
       </Modal>

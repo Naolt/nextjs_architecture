@@ -47,9 +47,14 @@ export default function DashBoardProfile() {
               top={-50}
             />
           </Group>
-          <Stack>
+          <Stack gap={5}>
             <Text size="lg" fw={500}>
               Soloda Pharmacy
+            </Text>
+            {/*  location */}
+            <Text c={"dimmed"} size="sm">
+              {/* generate realworld location in ethiopia street*/}
+              Addis Ababa, Ethiopia
             </Text>
           </Stack>
         </Group>
